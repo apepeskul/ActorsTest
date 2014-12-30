@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+    <script src="angular.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+</head>
+<body>
+<div ng-app="testModule" ng-controller="ctrlTest">
+            <table class="table table-striped table-condensed table-hover">
+        <thead>
+        <tr>
+            <th class="product" custom-sort order="'product'" sort="sort">Продукт&nbsp;</th>
+            <th class="product_group" custom-sort order="'product_group'" sort="sort">Группа продуктов&nbsp;</th>
+            <th class="proteins" custom-sort order="'proteins'" sort="sort">Белки&nbsp;</th>
+            <th class="fats" custom-sort order="'fats'" sort="sort">Жиры&nbsp;</th>
+            <th class="carbohydrates" custom-sort order="'carbohydrates'" sort="sort">Углеводы&nbsp;</th>
+            <th class="calories" custom-sort order="'calories'" sort="sort">Калории&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse">
+            <td>{{item.product}}</td>
+            <td>{{item.product_group}}</td>
+            <td>{{item.proteins}}</td>
+            <td>{{item.fats}}</td>
+            <td>{{item.carbohydrates}}</td>
+            <td>{{item.calories}}</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <td colspan="6">
+                <ul class="pagination">
+                    <li ng-class="{disabled: currentPage == 0}">
+                        <a href ng-click="prevPage()">« Prev</a>
+                    </li>
+
+                    <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap) "
+                        ng-class="{active: n == currentPage}"
+                        ng-click="setPage()">
+                        <a href ng-bind="n + 1">1</a>
+                    </li>
+                    <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}">
+                        <a href ng-click="nextPage()">Next »</a>
+                    </li>
+                </ul>
+        </td>
+        </tfoot>
+    </table>
+</div>
+</body>
+</html>
